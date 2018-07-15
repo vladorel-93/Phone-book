@@ -13,22 +13,23 @@ public class UserRepMock implements UserRepository{
     AtomicInteger counter = new AtomicInteger(0);
 
     public User getUserById(int id) {
-        return null;
+        return users.get(id);
     }
 
     public User saveUser(User user) {
-        return null;
+        user.setId(counter.incrementAndGet());
+        return users.put(user.getId(), user);
     }
 
     public void deleteUser(User user) {
-
+        users.remove(user.getId());
     }
 
     public User updateUser(User user) {
-        return null;
+        return users.put(user.getId(), user);
     }
 
     public Collection<User> getAllUsers() {
-        return null;
+        return users.values();
     }
 }

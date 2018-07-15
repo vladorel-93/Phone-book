@@ -2,16 +2,18 @@ package model;
 
 public class User {
     private String name;
-
+    private int id;
     private String phone;
     private String address;
+
+
 
     public User() {
     }
 
-    public User(String name, String phone, String address) {
+    public User(String name, String phone, String address, int id) {
         this.name = name;
-
+        this.id = id;
         this.phone = phone;
         this.address = address;
     }
@@ -20,7 +22,13 @@ public class User {
         this.name = name;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public int getId() {
+        return id;
+    }
 
     public void setPhone(String phone) {
         this.phone = phone;
