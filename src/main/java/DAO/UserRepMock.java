@@ -8,9 +8,14 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserRepMock implements UserRepository{
-    private Map<Integer, User> users = new HashMap<Integer, User>();
 
-    AtomicInteger counter = new AtomicInteger(0);
+    private static Map<Integer, User> users = new HashMap<Integer, User>();
+
+    static AtomicInteger counter = new AtomicInteger(0);
+
+    static {
+        users.put(counter.addAndGet(1), new User("Roma", "89168225012", "Varshavka", counter.get()));
+    }
 
     public User getUserById(int id) {
         return users.get(id);

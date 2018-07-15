@@ -1,5 +1,31 @@
 <html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.min.js"></script>
+</head>
 <body>
 <h2>hi</h2>
+<div ng-app="mainApp">
+<a href="#addUser">Add user</a>
+</div>
+
+<script>
+    var mainApp = angular.module("mainApp", ['ngRoute']);
+    mainApp.config(['$routeProvider', function($routeProvider) {
+        $routeProvider.when('/addUser', {templateUrl: addUser.htm, controller: AddUserController}).
+            when('/editUser', {templateUrl: editUser.htm, controller: EditUserController}).
+            when('/viewUsers', {templateUrl: viewUsers.htm, controller: viewUsers}).otherwise({redirectTo: '/viewUsers'})
+    }]);
+
+    mainApp.controller('AddUserController', function($scope, $http, $location){
+        $scope.createUser = function () {
+            $http.post("api/user/", $scope.user).success(function(response){
+                $location.path("/viewUsers");
+            });
+        }
+    });
+
+
+</script>
 </body>
 </html>
