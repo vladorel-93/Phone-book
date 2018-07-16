@@ -29,6 +29,12 @@ public class UserController {
         return user;
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public User saveUser(@RequestBody User user){
+        repository.saveUser(user);
+        return user;
+    }
+
     @RequestMapping(value = "/", method = RequestMethod.DELETE)
     public User deleteUser(@RequestBody User user){
         repository.deleteUser(user);

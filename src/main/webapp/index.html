@@ -14,12 +14,45 @@
     mainApp.config(['$routeProvider', function($routeProvider) {
         $routeProvider.when('/addUser', {templateUrl: addUser.htm, controller: AddUserController}).
             when('/editUser', {templateUrl: editUser.htm, controller: EditUserController}).
-            when('/viewUsers', {templateUrl: viewUsers.htm, controller: viewUsers}).otherwise({redirectTo: '/viewUsers'})
+            when('/viewUsers', {templateUrl: viewUsers.htm, controller: UsersController}).otherwise({redirectTo: '/viewUsers'})
     }]);
+
+    mainApp.service('UserService', function(){
+        var savedData = {}
+        function set(data){savedData = data;}
+        function get(){return savedData;}
+        return {set: set, get: get}
+    });
 
     mainApp.controller('AddUserController', function($scope, $http, $location){
         $scope.createUser = function () {
             $http.post("api/user/", $scope.user).success(function(response){
+                $location.path("/viewUsers");
+            });
+        }
+    });
+
+    mainApp.controller('EditUserController', function($scope, $http, $location){
+        $scope.user = UserService.get();
+        $scope.saveUser = function(user){
+            $http.put("api/user/", user).success(function(response){
+                $location.path("/viewUsers")
+            });
+        }
+    });
+
+    mainApp.controller('UsersController', function($scope, $http, $location){
+        $http.get("api/user/").success(function(response){
+            $scope.users = response;
+        });
+
+        $scope.editUser = function(user){
+            UserService.set(user);
+            $location.path("/editUser");
+        };
+
+        $scope.deleteUser = function(response){
+            $http.delete("api/user/", user).success(function(response){
                 $location.path("/viewUsers");
             });
         }
