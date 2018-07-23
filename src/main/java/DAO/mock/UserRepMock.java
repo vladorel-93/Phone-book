@@ -1,5 +1,6 @@
-package DAO;
+package DAO.mock;
 
+import DAO.UserRepository;
 import model.User;
 
 import java.util.Collection;
@@ -7,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class UserRepMock implements UserRepository{
+public class UserRepMock implements UserRepository {
 
     private static Map<Integer, User> users = new HashMap<Integer, User>();
 
