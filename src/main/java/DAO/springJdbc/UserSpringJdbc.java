@@ -37,7 +37,7 @@ public class UserSpringJdbc implements UserRepository {
             });
         }
         catch (EmptyResultDataAccessException c){logger.info("Empty result");}
-        return null;
+        return user;
     }
 
     public User saveUser(User user) {

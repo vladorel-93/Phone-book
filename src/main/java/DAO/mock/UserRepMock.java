@@ -2,12 +2,14 @@ package DAO.mock;
 
 import DAO.UserRepository;
 import model.User;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@Component
 public class UserRepMock implements UserRepository {
 
     private static Map<Integer, User> users = new HashMap<Integer, User>();
