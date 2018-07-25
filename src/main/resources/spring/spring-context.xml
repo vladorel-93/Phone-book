@@ -27,7 +27,7 @@
     <beans:bean id="jsonMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
     </beans:bean>
 
-    <beans:bean id="repository" class="DAO.springJdbc.UserSpringJdbc"/>
+    <beans:bean id="repository" class="DAO.hibernate.UserHibernate"/>
 
     <context:component-scan base-package="model"/>
     <context:component-scan base-package="DAO"/>
